@@ -54,11 +54,11 @@ class PolygonsController extends Controller
 
         // create data
         if (!$this->polygons->create($data)) {
-            return redirect()->route('map')->with('error', 'Point failed to added');
+            return redirect()->route('map')->with('error', 'Polygon failed to added');
         }
 
         // redirect to map
-        return redirect()->route('map')->with('success', 'Point has been added');
+        return redirect()->route('map')->with('success', 'Polygon has been added');
 
     }
 

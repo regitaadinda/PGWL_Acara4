@@ -38,19 +38,19 @@ class PointsController extends Controller
      */
     public function store(Request $request)
     {
-        //validate request
+        //Validation
         $request->validate(
-        [
-            'name' => 'required|unique:points,name',
-            'description' => 'required',
-            'geom_point' => 'required',
-        ],
-        [
-            'name.required'=> 'Name i required',
-            'name.unique'=> 'Name already exists',
-            'description.required' => 'Description is required',
-            'geom_point.required' => 'Geometry point is required',
-        ]
+            [
+                'name' => 'required|unique:points,name',
+                'description' => 'required',
+                'geom_point' => 'required',
+            ],
+            [
+                'name.required' => 'Name is required',
+                'name.unique' => 'Name already exists',
+                'description.required' => 'Description is required',
+                'geom_point.required' => 'Location is required',
+            ]
         );
 
         $data = [
@@ -60,12 +60,13 @@ class PointsController extends Controller
         ];
 
         //Create Data
-        if (!$this->points->create($data)){
-            return redirect()->route('map')->with('Error','Point failed to add');
+        if (!$this->points->create($data)) {
+            return redirect()->route('map')->with('error', 'Point Failed to add');
         }
 
         //Redirect to map
-        return redirect()->route('map')->with('success','Point has been added');
+        return redirect()->route('map')->with('success', 'Point has been added');
+
     }
 
     /**
