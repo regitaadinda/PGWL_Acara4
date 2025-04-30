@@ -33,26 +33,42 @@ class PolylinesController extends Controller
      */
     public function store(Request $request)
     {
-         //validate request
+         //Validate
          $request->validate(
             [
-                'name' => 'required|unique:polylines,name',
+                'name' => 'required|unique:points,name',
                 'description' => 'required',
                 'geom_polyline' => 'required',
+                'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2000',
             ],
             [
-                'name.required'=> 'Name i required',
-                'name.unique'=> 'Name already exists',
+                'name.required' => ' Name is required',
+                'name.unique' => 'Name already exists',
                 'description.required' => 'Description is required',
-                'geom_polyline.required' => 'Geometry polyline is required',
+                '_polyline.required' => 'Geometry point is required',
             ]
-            );
+        );
 
-            $data = [
-                'geom' => $request->geom_polyline,
-                'name' => $request->name,
-                'description' => $request->description,
-            ];
+        //Create Image Directory if not exists
+        if (!is_dir('storage/images')) {
+            mkdir('./storage/images', 0777);
+        }
+
+        // Get image file
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $name_image = time() . "_polyline." . strtolower($image->getClientOriginalExtension());
+            $image->move('storage/images', $name_image);
+        } else {
+            $name_image = null;
+        }
+
+        $data = [
+            'geom' => $request->geom_polyline,
+            'name' => $request->name,
+            'description' => $request->description,
+            'image' => $name_image,
+        ];
 
             // Create Data
             if (!$this->polylines->create($data)) {
