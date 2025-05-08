@@ -14,7 +14,7 @@ class PolylinesModel extends Model
     {
         // Ambil data dari database
         $polylines = self::select(DB::raw('
-    st_asgeojson(geom) as geom,
+    id,st_asgeojson(geom) as geom,
     name,
     description, image,
     st_length(geom, true) as length_m,
@@ -33,6 +33,7 @@ class PolylinesModel extends Model
                 'type' => 'Feature',
                 'geometry' => json_decode($p->geom),
                 'properties' => [
+                    'id'=> $p->id,
                     'name' => $p->name,
                     'description' => $p->description,
                     'length_m' => $p->length_m,
