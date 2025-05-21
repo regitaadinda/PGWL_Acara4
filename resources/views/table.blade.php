@@ -8,30 +8,27 @@
                 <thead class="table-dark">
                     <tr>
                         <th>No</th>
-                        <th>Nama</th>
-                        <th>NIM</th>
-                        <th>Kelas</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($points as $p)
                     <tr>
-                        <td>1</td>
-                        <td>Shafa</td>
-                        <td>23/1111</td>
-                        <td>B</td>
+                        <td>{{$p->id}}</td>
+                        <td>{{$p->name}}</td>
+                        <td>{{$p->description}}</td>
+                        <td>
+                            <img src="{{ asset('storage/images/' . $p->image) }}" alt=""
+                            width="200" title="{{$p->image}}">
+                        </td>
+                        <td>{{$p->created_at}}</td>
+                        <td>{{$p->updated_at}}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bela</td>
-                        <td>23/2222</td>
-                        <td>B</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Caca</td>
-                        <td>23/3333</td>
-                        <td>B</td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

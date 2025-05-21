@@ -77,7 +77,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input type="text" class="form-control" id="name" name="name"
-                                placeholder="fill point name">
+                                placeholder="fill polyline name">
                         </div>
 
                         <div class="mb-3">
@@ -258,13 +258,24 @@
                 var routedelete = "{{ route('points.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{ route('points.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent = "Nama: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br>" +
                     "Dibuat: " + feature.properties.created_at + "<br>" + "<img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' width='250' alt=''>" +  "<br>" +
-                    "<form method='POST' action='" +routedelete+ "'>" +
-                    '@csrf' +'@method("DELETE")' +
-                    "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='"+ routeedit +"' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                        "<div class='col-6'>" +
+                            "<form method='POST' action='" +routedelete+ "'>" +
+                            '@csrf' +'@method("DELETE")' +
+                            "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                            "</form>" +
+                        "</div>" +
+                    "</div>";
+
 
 
                 layer.on({
@@ -289,14 +300,25 @@
                 var routedelete = "{{ route('polylines.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{ route('polylines.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent = "Nama: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br>" +
                     "Panjang: " + feature.properties.length_km + " km" + "<br>" +
                     "Dibuat: " + feature.properties.created_at + "<br>" + "<img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' width='250' alt=''>" +  "<br>" +
-                    "<form method='POST' action='" +routedelete+ "'>" +
-                    '@csrf' +'@method("DELETE")' +
-                    "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
+
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='"+ routeedit +"' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                        "<div class='col-6'>" +
+                            "<form method='POST' action='" +routedelete+ "'>" +
+                            '@csrf' +'@method("DELETE")' +
+                            "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
+                            "</form>" +
+                        "</div>" +
+                    "</div>";
 
                 layer.on({
                     click: function(e) {
@@ -316,19 +338,26 @@
         // GeoJSON polygon
         var polygon = L.geoJson(null, {
             onEachFeature: function(feature, layer) {
-
                 var routedelete = "{{ route('polygons.destroy', ':id')}}";
                 routedelete = routedelete.replace(':id', feature.properties.id);
 
+                var routeedit = "{{ route('polygons.edit', ':id')}}";
+                routeedit = routeedit.replace(':id', feature.properties.id);
+
                 var popupContent = "Nama: " + feature.properties.name + "<br>" +
                     "Deskripsi: " + feature.properties.description + "<br>" +
-                    "Luas: " + feature.properties.area_hektar.toFixed(2) + "Ha<br>" +
+                    "Luas: " + feature.properties.luas_hektar.toFixed(2) + " hektar" + "<br>" +
                     "Dibuat: " + feature.properties.created_at + "<br>" + "<img src='{{ asset('storage/images/') }}/" + feature.properties.image + "' width='250' alt=''>" +  "<br>" +
-                    "<form method='POST' action='" +routedelete+ "'>" +
-                    '@csrf' +'@method("DELETE")' +
-                    "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>" +
-                    "</form>";
-                    
+                    "<div class='row mt-4'>" +
+                        "<div class='col-6 text-end'>" +
+                            "<a href='"+ routeedit +"' class='btn btn-warning btn-sm'><i class='fa-solid fa-pen-to-square'></i></a>" +
+                        "</div>" +
+                        "<div class='col-6'>" +
+                            "<form method='POST' action='" +routedelete+ "'>" +
+                            '@csrf' +'@method("DELETE")' +
+                            "<button type='submit' class='btn btn-sm btn-danger' onclick='return confirm(`Yakin akan dihapus?`)'><i class='fa-solid fa-trash-can'></i></button>"
+                            "</form>";
+
                 layer.on({
                     click: function(e) {
                         polygon.bindPopup(popupContent);
