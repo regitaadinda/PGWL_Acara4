@@ -3,12 +3,12 @@
 ### **Sistem Informasi Geospasial Interaktif Lokasi Rumah Sakit Kota Surabaya**  
 ### **Dikembangkan oleh: Regita Adinda Sefty**
 
-## 🧭 Ringkasan Proyek  
+## Ringkasan Proyek  
 **RSFinder SBY** merupakan platform berbasis web yang menyediakan visualisasi spasial lokasi rumah sakit di Kota Surabaya. Aplikasi ini dikembangkan menggunakan Laravel dan peta interaktif Leaflet. Melalui sistem ini, pengguna dapat menelusuri, menilai, dan mengelola data rumah sakit langsung di atas peta.  
 
 Selain itu, sistem juga mendukung fitur autentikasi pengguna, form saran publik, dan manajemen data (CRUD), menjadikannya sarana interaktif dan partisipatif dalam penyediaan informasi fasilitas kesehatan.
 
-## 🔍 Tujuan Utama  
+## Tujuan Utama  
 - Menyediakan informasi spasial RSUD di Kota Surabaya  
 - Mempermudah akses data kesehatan melalui antarmuka peta modern  
 - Memungkinkan pengguna untuk menambah, mengubah, dan menghapus data RS  
@@ -35,7 +35,7 @@ Selain itu, sistem juga mendukung fitur autentikasi pengguna, form saran publik,
 - Dropdown profil untuk edit profil dan logout  
 - Middleware `auth` untuk mengatur akses rute web dan API  
 
-## ⚙️ Alat & Bahan yang Digunakan  
+## Alat & Bahan yang Digunakan  
 - **Frontend**: HTML, CSS, JavaScript, Bootstrap 5, Laravel Blade  
 - **Pemetaan**: Leaflet.js, Leaflet Draw, Routing Machine, Search, WMS (Geoserver)  
 - **Geospasial**: GeoJSON, WKT (Terraformer.js), PostGIS  
