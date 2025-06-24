@@ -9,6 +9,7 @@ use App\Http\Controllers\PolygonsController;
 use App\Http\Controllers\PolylinesController;
 use App\Http\Controllers\PublicController;
 
+Route::get('/', [PublicController::class, 'index']);
 Route::get('home', [PublicController::class, 'index'])->name('home');
 
 
@@ -28,5 +29,10 @@ Route::resource('polygons', PolygonsController::class);
 
 Route::get('/map', [PointsController::class,'index'])->middleware(['auth', 'verified'])->name('map');
 Route::get('/table', [TableController::class,'index'])->name('table');
+
+// Tambahkan route test di bawah sini
+Route::get('/test', function () {
+    return view('test');
+});
 
 require __DIR__.'/auth.php';

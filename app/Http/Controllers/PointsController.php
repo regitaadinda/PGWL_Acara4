@@ -43,6 +43,7 @@ class PointsController extends Controller
             [
                 'name' => 'required|unique:points,name',
                 'description' => 'required',
+                'address' => 'required',
                 'geom_point' => 'required',
                 'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2000',
             ],
@@ -50,6 +51,7 @@ class PointsController extends Controller
                 'name.required' => ' Name is required',
                 'name.unique' => 'Name already exists',
                 'description.required' => 'Description is required',
+                'address.required' => 'Address is required',
                 'geom_point.required' => 'Geometry point is required',
             ]
         );
@@ -71,8 +73,10 @@ class PointsController extends Controller
         $data = [
             'geom' => $request->geom_point,
             'name' => $request->name,
-            'description' => $request->description,
             'image' => $name_image,
+            'address' => $request->address,
+            'description' => $request->description,
+
             'user_id' => auth()->user()->id,
         ];
 
@@ -111,21 +115,24 @@ class PointsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-            //Validate
-            $request->validate(
-                [
-                    'name' => 'required|unique:points,name,' . $id,
-                    'description' => 'required',
-                    'geom_point' => 'required',
-                    'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2000',
-                ],
-                [
-                    'name.required' => ' Name is required',
-                    'name.unique' => 'Name already exists',
-                    'description.required' => 'Description is required',
-                    'geom_point.required' => 'Geometry point is required',
-                ]
-            );
+            ///Validate
+        $request->validate(
+            [
+                'name' => 'required|unique:points,name',
+                'description' => 'required',
+                'address' => 'required',
+                'geom_point' => 'required',
+                'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2000',
+            ],
+            [
+                'name.required' => ' Name is required',
+                'name.unique' => 'Name already exists',
+                'description.required' => 'Description is required',
+                'address.required' => 'Address is required',
+                'geom_point.required' => 'Geometry point is required',
+            ]
+        );
+
 
             //Create Image Directory if not exists
             if (!is_dir('storage/images')) {
@@ -156,6 +163,7 @@ class PointsController extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'image' => $name_image,
+                'address' => $request->address,
             ];
 
             //Update Data

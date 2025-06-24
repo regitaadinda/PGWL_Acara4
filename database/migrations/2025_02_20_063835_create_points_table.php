@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->geometry('geom');
             $table->string('name');
+            $table->text('address');
             $table->text('description');
             $table->string('image')->nullable();
             $table->timestamps();

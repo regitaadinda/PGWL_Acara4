@@ -23,6 +23,7 @@ class ApiController extends Controller
         return response()->json($points);
     }
 
+
     public function point($id)
     {
         $points = $this->points->geojson_point($id);
